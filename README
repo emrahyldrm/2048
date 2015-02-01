@@ -1,0 +1,7 @@
+2048 game on ubuntu terminal implementation in c
+
+install ncurses lib before compiling
+
+sudo apt-get install ncurses-dev
+
+it is not finished
