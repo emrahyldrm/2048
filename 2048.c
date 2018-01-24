@@ -7,6 +7,7 @@ typedef struct
 	int row, col;
 }win_size_t;
 
+
 void drawTable(win_size_t winsize, int nums[][4]);
 void getBornField(int *y, int *x);
 void writeNums(win_size_t winsize, int y, int x);
