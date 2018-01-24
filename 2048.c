@@ -2,14 +2,10 @@
 #include<stdlib.h>
 #include<unistd.h>
 
-
-
 typedef struct
 {
 	int row, col;
 }win_size_t;
-
-
 
 void drawTable(win_size_t winsize, int nums[][4]);
 void getBornField(int *y, int *x);
@@ -23,7 +19,6 @@ int rightMoveMaker(int nums[][4]);
 void newBorn(int nums[][4]);
 
 
-
 int main()
 {
 	int row, col;
@@ -34,8 +29,6 @@ int main()
 	int command;
 	win_size_t winsize;
 	
-	
-	
 	initscr();
 	curs_set(0);
 	keypad(stdscr, TRUE);
@@ -43,27 +36,23 @@ int main()
 	timeout(TRUE);
 	
 	getmaxyx(stdscr, winsize.row, winsize.col);
-
 		
 	getBornField(&y, &x);
 	nums[y][x] = 2;
 	getBornField(&y, &x);
 	nums[y][x] = 2;
 
-	
 	while(1)
 	{	
 		drawTable(winsize, nums);
 		refresh();
-		
-		
 		command = getch();
 		
 		if(command == KEY_UP)
 		{
 			while(flag)
-				flag = upMoveMaker(nums);
-			
+				flag = upMoveMaker(nums);			
+		
 			newBorn(nums);
 			flag=1;
 		}
@@ -73,8 +62,7 @@ int main()
 			while(flag)
 				flag = leftMoveMaker(nums);
 			
-			newBorn(nums);
-			
+			newBorn(nums);			
 			flag=1;
 			
 		}
@@ -84,7 +72,6 @@ int main()
 				flag = rightMoveMaker(nums);
 			
 			newBorn(nums);
-
 			flag=1;
 		}
 		else if(command == KEY_DOWN)
@@ -93,27 +80,20 @@ int main()
 				flag = downMoveMaker(nums);
 			
 			newBorn(nums);
-	
 			flag=1;
 		}
-		
-		
+			
 		if(!overControl(nums))
-		{
 			break;
-		}		
 		
 		clear();
 		usleep(100000);
 	}
 	
-	
-
 	getchar();
 	endwin();
 	return 0;
 }
-
 
 
 void drawTable(win_size_t winsize, int nums[][4])
@@ -130,25 +110,16 @@ void drawTable(win_size_t winsize, int nums[][4])
 	for(a=0, i=-1; a < 4; i++, a++)
 	{
 		for(b=0,j=-2; b < 4; j+=5, b++)
-		{
-			mvprintw(winsize.row/2+i, winsize.col/2+j+1, "%d", nums[a][b]);
-		}
-		
+			mvprintw(winsize.row/2+i, winsize.col/2+j+1, "%d", nums[a][b]);	
 	}
 	mvprintw(winsize.row/2+3, winsize.col/2-2, "---------------------");
-
 }
-
-
 
 void getBornField(int *y, int *x)
 {
-	
 	*y = rand() % 4;
-	
 	*x = rand() % 4;
 }
-
 
 
 void printArray(int nums[][4])
@@ -160,12 +131,9 @@ void printArray(int nums[][4])
 	{
 		for(j=0; j<4; j++)
 			printf("%d  ", nums[i][j]);
-	
 		printf("\n");
-		
 	}
 }
-
 
 
 int upMoveMaker(int nums[][4])
@@ -198,7 +166,6 @@ int upMoveMaker(int nums[][4])
 		}
 	return flag;
 }
-
 
 
 int leftMoveMaker(int nums[][4])
@@ -297,11 +264,9 @@ int rightMoveMaker(int nums[][4])
 			}
 		}		
 	}
-	
 	mvprintw(2,1,"%d", flag_2);
 	return flag;
 }
-
 
 
 int overControl(int nums[][4])
@@ -323,7 +288,6 @@ int overControl(int nums[][4])
 	}
 	return flag;
 }
-
 
 
 void newBorn(int nums[][4])
